@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <label>Navn<input type="text" id="navn"></label>
+    <label>Telefon<input type="text" id="telefon"></label>
+    <label>Adresse<input type="text" id="adresse"></label>
+    <label>Fodselsnumer<input type="text" id="fodselsnummer"></label>
+    <button onclick="vispersoner()">Vis personer</button>
+    <div id="vis"></div>
+
+
+    <script type="application/javascript">
+        let personliste = [];
+
+        function vispersoner() {
+            /*
+            let person1= {
+                navn: "Ola Nordamnn",
+                telefon: 12234567,
+                adresse: "Osloveien 82",
+                fodselsnummer: 12345678910
+            }
+
+            let person2 = {
+                navn: "Kari Nordmann",
+                telefon: 98765432,
+                adresse: "Osloveien 82",
+                fodselsnummer: 12345678810
+            }
+
+            let person3 = {
+                navn: "Sara Edvartsen",
+                telefon: 95481629,
+                adresse: "Askerveien 62",
+                fodselsnummer: 12345678810
+            }
+
+            let person4 = {
+                navn: "Kurt Nilsen",
+                telefon: 12345678,
+                adresse: "Veienveien 2",
+                fodselsnummer: 12345678910
+            }
+
+            let personliste = [];
+            personliste.push(person1)
+            personliste.push(person2)
+            personliste.push(person3)
+            personliste.push(person4)
+
+             */
+
+            let person = {
+                navn: document.getElementById("navn").value,
+                telefon: document.getElementById("telefon").value,
+                adresse: document.getElementById("adresse").value,
+                fodselsnummer: document.getElementById("fodselsnummer").value
+            }
+
+            personliste.push(person)
+
+            let sortert = personliste.sort(function (person1sorter, person2sorter) {
+                if (person1sorter.navn > person2sorter.navn) {
+                    return 1;
+                } else if (person1sorter.navn < person2sorter.navn) {
+                    return -1
+                }
+
+                else {
+                    if (person1sorter.adresse > person2sorter.adresse) {
+                        return 1;
+                    }
+                    else {
+                        return -1;
+                    }
+                }
+
+            })
+
+            let ut = "<table><tr><th>Navn</th><th>Telefon</th><th>Adresse</th><th>Fodselsnummer</th></tr>"
+
+
+            let teller = 0;
+            for (let person of sortert) {
+                /*
+                if (teller %2 === 0) {
+                    ut += "<tr><td><strong>" + person.navn + "</strong></td><td><strong>" + person.telefon + "</strong></td><td><strong>" +
+                        person.adresse + "</strong></td></tr>"
+                } else {
+                    ut += "<tr><td>" + person.navn + "</td><td>" + person.telefon + "</td><td>" +
+                        person.adresse + "</td></tr>"
+                }
+                 */
+                //if (parseInt((person.fodselsnummer/100))%2 === 0) {
+                if (parseInt(person.fodselsnummer.toString()[8])%2 === 0){
+                    ut += "<tr><td><strong>" + person.navn + "</strong></td><td><strong>" + person.telefon + "</strong></td><td><strong>" +
+                        person.adresse + "</strong></td><td><strong>" + person.fodselsnummer + "</strong></td></tr>"
+                } else {
+                    ut += "<tr><td>" + person.navn + "</td><td>" + person.telefon + "</td><td>" +
+                        person.adresse + "</td><td>" + person.fodselsnummer +"</td></tr>"
+                }
+
+                teller++
+            }
+
+            ut += "</table>"
+
+            document.getElementById("vis").innerHTML = ut;
+        }
+    </script>
+</body>
+</html>
